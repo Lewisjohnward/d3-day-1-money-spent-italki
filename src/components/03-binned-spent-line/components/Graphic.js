@@ -13,31 +13,31 @@ import {
   curveStep,
 } from "d3";
 
-const width = 560;
-const height = 250;
+const formatTime = timeFormat("%Y");
 
-const margin = {
-  top: 10,
-  right: 75,
-  bottom: 60,
-  left: 95,
-};
-
-const innerHeight = height - margin.top - margin.bottom;
-const innerWidth = width - margin.right - margin.left;
-
-const yAxisLabelOffset = 60
-const xAxisLabelOffset = 50
-const tickOffset = 10;
-
-const formatTime = timeFormat("%Y")
-
-export const Graphic = () => {
+export const Graphic = ({ carousel }) => {
   const data = useGetData();
 
   if (!data) {
     return <h1>...Loading</h1>;
   }
+
+  const width = carousel ? 1480 : 560;
+  const height = carousel ? 560 : 250;
+
+  const margin = {
+    top: 10,
+    right: 75,
+    bottom: 60,
+    left: 95,
+  };
+
+  const innerWidth = width - margin.right - margin.left;
+  const innerHeight = height - margin.top - margin.bottom;
+
+  const tickOffset = 10;
+  const xAxisLabelOffset = 50;
+  const yAxisLabelOffset = 60;
 
   const xValue = (d) => d.date;
   const xScale = scaleTime()
@@ -91,39 +91,43 @@ export const Graphic = () => {
 
           {xScale.ticks().map((d) => (
             <g key={d} transform={`translate(${xScale(d)}, 0)`}>
-              <line stroke="gray" opacity="0.2"  y2={innerHeight} />
+              <line stroke="gray" opacity="0.2" y2={innerHeight} />
               <text
-                style={{textAnchor: "middle"}}
+                style={{ textAnchor: "middle" }}
                 y={innerHeight + tickOffset}
                 dy=".71em"
-              >{formatTime(d)}</text>
-            </g>
-          ))}   
-
-          <text
-            transform={`translate(${innerWidth / 2}, ${innerHeight + xAxisLabelOffset})`}
-            style={{textAnchor: "middle"}}
-          >Year</text>
-
-
-          {yScale.ticks().map((d) => (
-            <g key={d} transform={`translate(0, ${yScale(d)})`}>
-              <line stroke="gray" opacity="0.2"  x2={innerWidth} />
-              <text
-                style={{textAnchor: "end"}}
-                x={-tickOffset}
-                dy=".32em"
-              >{d}</text>
+              >
+                {formatTime(d)}
+              </text>
             </g>
           ))}
 
           <text
-            style={{textAnchor: "middle"}}
-            transform={`translate(${-yAxisLabelOffset}, ${innerHeight / 2})rotate(-90)`}
-          >Total Spent (£)</text>
+            transform={`translate(${innerWidth / 2}, ${
+              innerHeight + xAxisLabelOffset
+            })`}
+            style={{ textAnchor: "middle" }}
+          >
+            Year
+          </text>
 
-        
+          {yScale.ticks().map((d) => (
+            <g key={d} transform={`translate(0, ${yScale(d)})`}>
+              <line stroke="gray" opacity="0.2" x2={innerWidth} />
+              <text style={{ textAnchor: "end" }} x={-tickOffset} dy=".32em">
+                {d}
+              </text>
+            </g>
+          ))}
 
+          <text
+            style={{ textAnchor: "middle" }}
+            transform={`translate(${-yAxisLabelOffset}, ${
+              innerHeight / 2
+            })rotate(-90)`}
+          >
+            Total Spent (£)
+          </text>
         </g>
       </svg>
     </div>

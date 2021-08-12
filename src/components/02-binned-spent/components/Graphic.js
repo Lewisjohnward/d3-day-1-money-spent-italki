@@ -10,31 +10,31 @@ import {
   timeFormat,
 } from "d3";
 
-const width = 560;
-const height = 250;
-
-const margin = {
-  top: 10,
-  right: 75,
-  bottom: 60,
-  left: 95,
-};
-
-const innerWidth = width - margin.right - margin.left;
-const innerHeight = height - margin.top - margin.bottom;
-
-const tickOffset = 10;
-const xLabelAxisOffset = 50;
-const yAxisLabelOffset = 60;
-
 const formatDate = timeFormat("%Y");
 
-export const Graphic = () => {
+export const Graphic = ({carousel}) => {
   const data = useGetData();
 
   if (!data) {
     return <h1>...Loading</h1>;
   }
+
+  const width = carousel ? 1480 : 560;
+  const height = carousel ? 560 : 250;
+
+  const margin = {
+    top: 10,
+    right: 75,
+    bottom: 60,
+    left: 95,
+  };
+  
+  const innerWidth = width - margin.right - margin.left;
+  const innerHeight = height - margin.top - margin.bottom;
+  
+  const tickOffset = 10;
+  const xLabelAxisOffset = 50;
+  const yAxisLabelOffset = 60;
 
   const xValue = (d) => d.date;
 

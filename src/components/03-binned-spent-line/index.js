@@ -18,12 +18,12 @@ const CountContainer = styled.div`
   align-items: center;
 `
 
-export const BinnedSpentLine03 = () => (
+export const BinnedSpentLine03 = ({carousel}) => (
   <MainContainer>
     <CountContainer>
     <Count />
     </CountContainer>
-    <Graphic />
+    <Graphic carousel={carousel}/>
     <DescriptionContainer>
       <Text />
     </DescriptionContainer>

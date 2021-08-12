@@ -2,26 +2,27 @@ import React from "react";
 import { useGetData } from "../../../hooks/useGetData";
 import { scaleTime, scaleLinear, extent, bin, max, timeFormat } from "d3";
 
-const width = 560;
-const height = 250;
-
-const margin = {
-  top: 10,
-  right: 75,
-  bottom: 60,
-  left: 95,
-};
-
-const innerWidth = width - margin.right - margin.left;
-const innerHeight = height - margin.top - margin.bottom;
-
-const tickOffset = 10;
-
-const yAxisLabelOffset = 60;
-const xAxisLabelOffset = 50;
-
-export const Graphic = () => {
+export const Graphic = ({carousel}) => {
   const data = useGetData();
+
+  const width = carousel ? 1480 : 560;
+  const height = carousel ? 560 : 250;
+  const circleRadius = carousel ? 10 : 3;
+
+  const margin = {
+    top: 10,
+    right: 75,
+    bottom: 60,
+    left: 95,
+  };
+
+  const innerWidth = width - margin.right - margin.left;
+  const innerHeight = height - margin.top - margin.bottom;
+
+  const tickOffset = 10;
+
+  const yAxisLabelOffset = 60;
+  const xAxisLabelOffset = 50;
 
   if (!data) {
     return <h1>...Loading</h1>;
@@ -29,7 +30,6 @@ export const Graphic = () => {
 
   const dateFormat = timeFormat("%Y");
 
-  
   const xValue = (d) => d.date;
   const yValue = (d) => d.price;
 
@@ -93,7 +93,7 @@ export const Graphic = () => {
             <circle
               cx={xScale(xValue(d))}
               cy={yScale(yValue(d))}
-              r={3}
+              r={circleRadius}
               opacity={0.4}
               fill="green"
             />
