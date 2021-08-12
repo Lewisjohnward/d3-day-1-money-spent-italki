@@ -11,6 +11,10 @@ import { Carousel } from "./pages/Carousel";
 
 import "./styles.css";
 
+
+const height = 560
+const width = 250
+
 export const App = () => (
   <>
   <Header />
