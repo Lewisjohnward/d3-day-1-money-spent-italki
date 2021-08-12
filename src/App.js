@@ -7,6 +7,7 @@ import { DonutChart06 } from "./components/06-donut-chart/index"
 import { LollipopChart07 } from "./components/07-lollipop-chart/index"
 import { ChangeViewButton } from "./components/other/changeView/ChangeViewButton";
 import { Header } from "./components/other/header/Header"
+import { Carousel } from "./pages/Carousel";
 
 import "./styles.css";
 
@@ -16,6 +17,7 @@ export const App = () => (
   
   <div className="page-container">
     <ChangeViewButton />
+    <Carousel />
     <SpentOnItalki01 />
     <BinnedSpent02 />
     <BinnedSpentLine03 />
