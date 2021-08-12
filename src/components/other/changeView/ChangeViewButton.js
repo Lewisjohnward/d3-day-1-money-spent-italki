@@ -32,9 +32,9 @@ const Mask = styled.div`
 `;
 
 export const ChangeViewButton = () => (
-  <li class="content__item">
+  <div class="content__item">
     <button class="button button--mimas">
       <span>View</span>
     </button>
-  </li>
+  </div>
 );
